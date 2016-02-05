@@ -1,0 +1,9 @@
+<h1>Companies</h1>
+
+<ul>
+  <li *ngFor="#company of (companies | async)">
+    <a href="#" (click)="selectCompany(company)">
+      {{company.name}}
+    </a>
+  </li>
+</ul>

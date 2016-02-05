@@ -1,0 +1,37 @@
+<div *ngIf="company">
+  <fieldset>
+    <legend>Company {{company.name}}</legend>
+
+    <form [ngFormModel]="companyForm" (submit)="onSubmit()">
+      <field label="Name" feedback="true">
+        <input [ngFormControl]="companyForm.controls.name"
+               [(ngModel)]="company.name"/>
+      </field>
+      <field label="Tags">
+        <labels [ngFormControl]="companyForm.controls.tags"
+                   [(ngModel)]="company.tags"></labels>
+      </field>
+
+      <field label="Street">
+        <input [ngFormControl]="companyForm.controls.addressStreet"
+               [(ngModel)]="company.address.street"/>
+      </field>
+      <field label="Zip code">
+        <input [ngFormControl]="companyForm.controls.addressZipCode"
+               [(ngModel)]="company.address.zipcode"/>
+      </field>
+      <field label="City">
+        <input [ngFormControl]="companyForm.controls.addressCity"
+               [(ngModel)]="company.address.city"/>
+      </field>
+
+      <error [error]="error"></error>
+
+      <toolbar>
+        <button type="submit" [disabled]="shouldDisableSubmitButton()" >Save <span *ngIf="submitPending || companyForm.pending" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
+        <button type="button" (click)="goToList()">Back</button>
+      </toolbar>
+    </form>
+
+  </fieldset>
+</div>
