@@ -5,7 +5,7 @@ import {Directive, ElementRef, Renderer, Input} from 'angular2/core';
 })
 export class BootstrapInputDirective {
   constructor(el: ElementRef, renderer: Renderer) {
-    renderer.setElementClass(el, 'form-control', true);
+    renderer.setElementClass(el.nativeElement, 'form-control', true);
   }
 }
 
@@ -14,7 +14,7 @@ export class BootstrapInputDirective {
 })
 export class BootstrapFormDirective {
   constructor(el: ElementRef, renderer: Renderer) {
-    renderer.setElementClass(el, 'form-horizontal', true);
+    renderer.setElementClass(el.nativeElement, 'form-horizontal', true);
   }
 }
 
@@ -23,7 +23,7 @@ export class BootstrapFormDirective {
 })
 export class BootstrapButtonDirective {
   constructor(el: ElementRef, renderer: Renderer) {
-    renderer.setElementClass(el, 'btn', true);
-    renderer.setElementClass(el, 'btn-primary', true);
+    renderer.setElementClass(el.nativeElement, 'btn', true);
+    renderer.setElementClass(el.nativeElement, 'btn-primary', true);
   }
 }
