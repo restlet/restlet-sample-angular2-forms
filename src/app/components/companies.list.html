@@ -2,7 +2,7 @@
 
 <ul>
   <li *ngFor="#company of (companies | async)">
-    <a href="#" (click)="selectCompany(company)">
+    <a [routerLink]="[ 'details', company.id ]">
       {{company.name}}
     </a>
   </li>

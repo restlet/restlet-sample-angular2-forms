@@ -1,11 +1,15 @@
-import {Component,Input,Output,OnInit,EventEmitter,ElementRef} from 'angular2/core';
-import {NgClass,Control} from 'angular2/common';
+import {
+  Component, Input,
+  Output, OnInit,
+  EventEmitter, ElementRef
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'labels',
     template: `
       <div *ngIf="labels">
-        <span *ngFor="#label of labels">
+        <span *ngFor="let label of labels">
           <span  class="label label-info" style="font-size:13px"
             (click)="removeLabel(label)">
             {{label}} <span class="glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>
@@ -13,7 +17,7 @@ import {NgClass,Control} from 'angular2/common';
         </span>
         <span *ngIf="addAreaDisplayed">
           <span style="display:inline-block;">
-            <input [(ngModel)]="labelToAdd" style="width: 50px; font-size: 14px;" class="custom"/>
+            <input [formControl]="labelToAdd" style="width: 50px; font-size: 14px;" class="custom"/>
             <em class="glyphicon glyphicon-ok text-muted" aria-hidden="true" (click)="addLabel(labelToAdd)"></em>
           </span>
         </span>
@@ -28,10 +32,15 @@ import {NgClass,Control} from 'angular2/common';
 // http://jsfiddle.net/t1ppLrzy/1/
 export class LabelsComponent {
   @Output()
-  labelsChange: EventEmitter;
+  labelsChange: EventEmitter<string[]> = new EventEmitter();
 
-  constructor(private elementRef:ElementRef) {
-    this.labelsChange = new EventEmitter();
+  addAreaDisplayed: boolean;
+
+  labels: string[];
+
+  labelToAdd: FormControl;
+
+  constructor(private elementRef: ElementRef) {
     this.addAreaDisplayed = false;
   }
 
@@ -48,9 +57,10 @@ export class LabelsComponent {
   }
 
   addLabel(label:string) {
-    this.labels.push(this.labelToAdd);
+    const value = this.labelToAdd.value;
+    this.labels.push(value);
     this.labelsChange.emit(this.labels);
-    this.labelToAdd = '';
+    this.labelToAdd.setValue('');
     this.addAreaDisplayed = false;
   }
 

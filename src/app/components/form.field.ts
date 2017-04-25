@@ -1,5 +1,12 @@
-import {Component,Input,OnInit,Query,QueryList,ElementRef,ContentChild} from 'angular2/core';
-import {NgClass,Control,NgFormControl} from 'angular2/common';
+import {
+  Component, Input,
+  OnInit, Query,
+  QueryList, ElementRef,
+  ContentChild
+} from '@angular/core';
+import {
+  FormControl
+} from '@angular/forms';
 
 @Component({
   selector: 'field',
@@ -52,7 +59,7 @@ export class FormFieldComponent {
   /*@Input()
   state: Control;*/
 
-  @ContentChild(NgFormControl) state;
+  @ContentChild(FormControl) state;
 
   constructor(private eltRef:ElementRef) {
 

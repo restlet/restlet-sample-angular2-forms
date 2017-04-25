@@ -1,11 +1,15 @@
-import {Component,Input,Output,OnInit,EventEmitter,ElementRef} from 'angular2/core';
-import {NgClass,Control} from 'angular2/common';
+import {
+  Component, Input,
+  Output, OnInit,
+  EventEmitter, ElementRef
+} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'labels',
     template: `
       <div *ngIf="labels">
-        <span *ngFor="#label of labels">
+        <span *ngFor="let label of labels">
           <span  class="label label-info" style="font-size:13px"
             (click)="removeLabel(label)">
             {{label}} <span class="glyphicon glyphicon-remove" style="font-size:10px;" aria-hidden="true"></span>
@@ -28,18 +32,21 @@ import {NgClass,Control} from 'angular2/common';
 // http://jsfiddle.net/t1ppLrzy/1/
 export class LabelsComponent implements OnInit {
   @Input()
-  labels:string[];
+  labels: string[];
 
   @Output()
-  labelsChange: EventEmitter;
+  labelsChange: EventEmitter<string[]> = new EventEmitter();
+
+  addAreaDisplayed: boolean;
+
+  labelToAdd: string;
 
   constructor(private elementRef:ElementRef) {
-    this.labelsChange = new EventEmitter();
     this.addAreaDisplayed = false;
   }
 
   ngOnInit() {
-  	console.log('this.tags = '+this.labels);
+  	console.log('this.tags = ' + this.labels);
   }
 
   removeLabel(label:string) {

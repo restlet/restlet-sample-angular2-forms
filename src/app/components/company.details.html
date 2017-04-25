@@ -1,0 +1,34 @@
+<div *ngIf="company">
+  <fieldset>
+    <legend>Company {{company.name}}</legend>
+
+    <form [formGroup]="companyForm" (submit)="onSubmit()">
+      <field label="Name" feedback="true">
+        <input formControlName="name"/>
+      </field>
+      <field label="Tags">
+        <labels formControlName="tags"></labels>
+      </field>
+
+      <div formGroupName="address">
+      <field label="Street">
+        <input formControlName="street"/>
+      </field>
+      <field label="Zip code">
+        <input formControlName="zipcode"/>
+      </field>
+      <field label="City">
+        <input formControlName="city"/>
+      </field>
+      </div>
+
+      <error [error]="error"></error>
+
+      <toolbar>
+        <button type="submit" [disabled]="shouldDisableSubmitButton()" >Save <span *ngIf="submitPending || companyForm.pending" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></button>
+        <button type="button" [routerLink]="[ '/companies' ]">Back</button>
+      </toolbar>
+    </form>
+
+  </fieldset>
+</div>
