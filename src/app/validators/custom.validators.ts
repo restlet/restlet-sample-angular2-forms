@@ -1,5 +1,5 @@
-import {Observable} from 'rxjs/Rx';
-import {CompaniesService} from '../services/companies.service';
+import { Observable } from 'rxjs/Observable';
+import { CompanyService } from '../services/companies.service';
 
 
 export function notEmptyValidator(control) {
@@ -17,7 +17,7 @@ export function zipCodeValidator(control) {
   return !valid ? { invalidZip: true }: null;
 }
 
-export function createUniqueNameValidator(service:CompaniesService,component) {
+export function createUniqueNameValidator(service: CompanyService, component) {
   return function(control) {
     return new Promise((resolve, reject) => {
       service.findCompanyByName(control.value).subscribe(
@@ -32,7 +32,7 @@ export function createUniqueNameValidator(service:CompaniesService,component) {
         err => {
           resolve({uniqueName: true});
         }
-      });
+      );
     });
   };
 }

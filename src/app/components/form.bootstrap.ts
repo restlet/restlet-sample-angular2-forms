@@ -1,4 +1,7 @@
-import {Directive, ElementRef, Renderer, Input} from 'angular2/core';
+import {
+  Directive, ElementRef,
+  Renderer, Input
+} from '@angular/core';
 
 @Directive({
   selector: 'input:not([noBootstrap]),textarea:not([noBootstrap]), select:not([noBootstrap])'

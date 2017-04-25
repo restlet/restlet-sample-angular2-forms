@@ -1,35 +1,36 @@
-import {Injectable} from 'angular2/core';
-import {Http,Headers} from 'angular2/http';
+import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Observable} from 'rxjs/Rx';
 
-export class Company {
-  constructor(public id: number, public name: string) { }
+export interface Company {
+  id: number;
+  name: string;
 }
 
 @Injectable()
 export class CompanyService {
-  constructor(private http:Http) {
+  constructor(private http: Http) {
   }
 
-  createAuthorizationHeader(headers:Headers) {
+  addAuthorizationHeader(headers: Headers) {
     headers.append('Authorization', 'Basic ' +
       btoa('a20e6aca-ee83-44bc-8033-b41f3078c2b6:c199f9c8-0548-4be7-9655-7ef7d7bf9d20')); 
   }
 
   getCompanies() {
-    var headers = new Headers();
-    this.createAuthorizationHeader(headers);
+    const headers = new Headers();
+    this.addAuthorizationHeader(headers);
 
     return this.http.get('https://angular2.apispark.net/v1/companies/', {
-      headers: headers
+      headers
     }).map(res => res.json());
   }
 
   getCompany(companyId:string) {
     var headers = new Headers();
-    this.createAuthorizationHeader(headers);
+    this.addAuthorizationHeader(headers);
 
     return this.http.get(`https://angular2.apispark.net/v1/companies/${companyId}`, {
       headers: headers
@@ -38,7 +39,7 @@ export class CompanyService {
 
   findCompanyByName(companyName:string) {
     var headers = new Headers();
-    this.createAuthorizationHeader(headers);
+    this.addAuthorizationHeader(headers);
 
     return this.http.get(`https://angular2.apispark.net/v1/companies/?name=${companyName}`, {
       headers: headers
@@ -47,7 +48,7 @@ export class CompanyService {
 
   updateCompany(companyId:string,company:Company) {
     var headers = new Headers();
-    this.createAuthorizationHeader(headers);
+    this.addAuthorizationHeader(headers);
     headers.append('Content-Type', 'application/json');
 
     return this.http.put(
